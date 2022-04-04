@@ -167,13 +167,13 @@ const App = () => {
     </button>
   );
 
-  let chainId = await ethereum.request({ method: 'eth_chainId' });
-  console.log("Connected to chain " + chainId);
-  // 0x4はRinkebyのID
-  const rinkebyChainId = "0x4";
-  if (chainId !== rinkebyChainId ) {
-    alert("You are not connected to the Rinkeby Test Network!");
-  }
+  // let chainId = await ethereum.request({ method: 'eth_chainId' });
+  // console.log("Connected to chain " + chainId);
+  // // 0x4はRinkebyのID
+  // const rinkebyChainId = "0x4";
+  // if (chainId !== rinkebyChainId ) {
+  //   alert("You are not connected to the Rinkeby Test Network!");
+  // }
 
   /*
   * ページがロードされたときに useEffect()内の関数が呼び出される 
