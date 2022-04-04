@@ -9,6 +9,9 @@ const TWITTER_HANDLE = 'my04125429';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const OPENSEA_LINK = '';
 const TOTAL_MINT_COUNT = 50;
+
+const CONTRACT_ADDRESS = "0x4174f958d1a62AcD94f020542f932F5dd09fc25b"
+
 const App = () => {
   /*
   * ユーザーのウォレットアドレスを格納するために使用する状態変数を定義
