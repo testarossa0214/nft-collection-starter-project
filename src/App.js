@@ -45,7 +45,7 @@ const App = () => {
     } else {
       console.log("No authorized account found");
     }
-  }
+  };
 
   /* 
   * connectWallet メソッドを実装する
@@ -72,32 +72,38 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   // setupEventListener 関数を定義
   // MyEpicNFT.sol の中で event がemit されたときに、
   // 情報を受け取ります
-  setupEventListener = async () => {}       // NFTが発行される際にemitされるNewEpicNFTMinted(MyEpicNFT.sol)イベントを受信。TokenIdを取得して、新しくmintされたNFTへのOpenSeaリンクをユーザーに提供している
-  try {
-    const { ethereum } = window;
-    if (ethereum) {
-      const provider = new ether.provider.Web3Provider(ethereum);
-      const signer = provider.getSigner();
-      // NFTが発行される
-      const connectedContract = new ethers.Contract(
-        CONTRACT_ADDRESS,
-        myEpicNFT.abi,
-        signer
-      );
-      // Event がemitされる際に、コントラクトから送信される情報を受け取っている
-      connectedContract.on("NewEpicNFTMinted", (from, tokenId) => {
-        console.log(from, tokenId.toNumber());
-        alert(
-          `あなたのウォレットに NFT を送信しました。OpenSea に表示されるまで最大10分かかることがあります。NFT へのリンクはこちらです： https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`
-        )
-      })
+  setupEventListener = async () => {       // NFTが発行される際にemitされるNewEpicNFTMinted(MyEpicNFT.sol)イベントを受信。TokenIdを取得して、新しくmintされたNFTへのOpenSeaリンクをユーザーに提供している
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ether.provider.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        // NFTが発行される
+        const connectedContract = new ethers.Contract(
+          CONTRACT_ADDRESS,
+          myEpicNFT.abi,
+          signer
+        );
+        // Event がemitされる際に、コントラクトから送信される情報を受け取っている
+        connectedContract.on("NewEpicNFTMinted", (from, tokenId) => {
+          console.log(from, tokenId.toNumber());
+          alert(
+            `あなたのウォレットに NFT を送信しました。OpenSea に表示されるまで最大10分かかることがあります。NFT へのリンクはこちらです： https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`
+          )
+        });
+        console.log("Setup event listener!");
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      } 
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   const askContractToMintNft = async () => {
     const CONTRACT_ADDRESS = "0x4174f958d1a62AcD94f020542f932F5dd09fc25b";
