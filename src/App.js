@@ -81,12 +81,12 @@ const App = () => {
     try {
       const { ethereum } = window;
       if (ethereum) {
-        const provider = new ether.provider.Web3Provider(ethereum);
+        const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         // NFTが発行される
         const connectedContract = new ethers.Contract(
           CONTRACT_ADDRESS,
-          myEpicNFT.abi,
+          myEpicNft.abi,
           signer
         );
         // Event がemitされる際に、コントラクトから送信される情報を受け取っている
@@ -94,7 +94,7 @@ const App = () => {
           console.log(from, tokenId.toNumber());
           alert(
             `あなたのウォレットに NFT を送信しました。OpenSea に表示されるまで最大10分かかることがあります。NFT へのリンクはこちらです： https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`
-          )
+          );
         });
         console.log("Setup event listener!");
       } else {
